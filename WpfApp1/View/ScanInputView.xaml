@@ -1,0 +1,55 @@
+﻿<Window x:Class="WpfApp1.View.ScanInputView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.View"
+        mc:Ignorable="d"
+        Title="警告！" Height="180" Width="600"
+        ResizeMode="NoResize"
+        MinWidth="600" MinHeight="150"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        Topmost="True"
+        FocusManager.FocusedElement="{Binding ElementName=InputTextBox}"
+        WindowStyle="SingleBorderWindow"
+        >
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock 
+            Grid.Row="0"
+            x:Name="MessageText" TextWrapping="Wrap" 
+            Margin="0,0,0,10" FontSize="14" FontWeight="Normal" 
+            Text="请先点击下方输入框后扫码，再点击确定！"/>
+
+        <TextBox 
+            Grid.Row="1"
+            x:Name="InputTextBox" Height="25" 
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Center" 
+            Margin="0,5,0,15"
+            InputMethod.IsInputMethodEnabled="False"
+            PreviewKeyDown="TextBox_PreviewKeyDown"
+            PreviewTextInput="TextBox_PreviewTextInput"
+            Text="{Binding ScanInputText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <StackPanel
+            Grid.Row="2"
+            Orientation="Horizontal" HorizontalAlignment="Right"  Margin="0,10,0,0" Cursor="">
+            <Button x:Name="OkButton" Content="确定" Width="80" Height="28" 
+                    Margin="0,0,10,0" FontWeight="Bold" Cursor="Hand"
+                    IsEnabled="{Binding CanSubmit}"
+                    Click="OkButton_Click"/>
+
+            <Button x:Name="CancelButton" Content="取消" Width="80" Height="28" 
+                    FontWeight="Bold" Cursor="Hand"
+                    Click="CancelButton_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
